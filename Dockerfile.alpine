@@ -4,6 +4,7 @@ RUN apk update && \
     apk add --no-cache gammu-smsd curl gettext tzdata ca-certificates
 
 ENV PIN 0000
+ENV PROTOCOL at
 ENV LC_ALL en_US.UTF-8
 ENV TZ UTC
 

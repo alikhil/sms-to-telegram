@@ -4,7 +4,7 @@
 [gammu]
 device = $DEVICE
 name = Phone on USB serial port HUAWEI_Technology HUAWEI_Mobile
-connection = at
+connection = $PROTOCOL
 
 [smsd]
 Service=files
