@@ -1,15 +1,21 @@
-FROM ubuntu:focal
+FROM alpine:3.17
+
+RUN apk update && \
+    apk add --no-cache gammu-smsd curl gettext tzdata ca-certificates
+
 ENV PIN 0000
-RUN apt-get update && \
-    apt-get install --no-install-recommends -y gammu-smsd curl gettext locales ca-certificates && \
-	localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 && \
-	apt-get clean && apt-get autoclean && \
-	rm -rf /var/lib/apt/lists/*
+ENV PROTOCOL at
 ENV LC_ALL en_US.UTF-8
+ENV TZ UTC
+
 COPY gammurc /etc/gammurc
 COPY sms_to_telegram.sh /etc/sms_to_telegram.sh
 COPY entrypoint.sh /usr/bin/entrypoint.sh
+
 RUN mkdir /var/log/smsd/ && \
+	mkdir -p /var/spool/gammu/ && \
+	cd /var/spool/gammu/ && \
+	mkdir inbox outbox sent error && \
     chmod +x /usr/bin/entrypoint.sh /etc/sms_to_telegram.sh
 
 ENTRYPOINT ["entrypoint.sh"]
