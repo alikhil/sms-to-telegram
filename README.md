@@ -1,6 +1,7 @@
 # sms-to-telegram
 
-Docker image for receiving SMS messages and sending them to Telegram using Gammu and compatible modem. For more details check my [tutorial](https://alik.page/posts/forwarding-sms-to-telegram/)
+Docker image for receiving SMS messages and sending them to Telegram using Gammu and compatible modem.
+For more details check my [tutorial](https://alik.page/posts/forwarding-sms-to-telegram/).
 
 ## Usage
 
@@ -18,6 +19,7 @@ services:
       - PIN=<your sim card pin>
       - CHAT_ID=<telegram chat/channel ID>
       - DEVICE=/dev/modem
+      - PROTOCOL=at
     cap_add:
     - NET_ADMIN
     - SYS_MODULE
